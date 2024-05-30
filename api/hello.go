@@ -3,8 +3,14 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"os/exec"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+	output,err := exec.Command("df", "-h").Output()
+	if err != nil {
+		fmt.Fprintf(w, "Error: %s", err)
+		return
+	}
+	fmt.Fprint(w, string(output))
 }
