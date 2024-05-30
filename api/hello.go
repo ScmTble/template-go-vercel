@@ -25,7 +25,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 
 	resp += string(output)
 
-	output,err = os.ReadFile("/proc/cmdline")
+	output,err = exec.Command("whoami").Output()
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s", err)
 		return
