@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"os/exec"
 )
 
@@ -13,4 +14,6 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprint(w, string(output))
+	_,hostname := os.Hostname()
+	fmt.Fprintf(w,"\n,hostname: %s",hostname )
 }
