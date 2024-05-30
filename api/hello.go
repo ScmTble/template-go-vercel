@@ -25,7 +25,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 
 	resp += string(output)
 
-	output,err = exec.Command("ps", "-ef").Output()
+	output,err = exec.Command("cat" ,"/proc/cmdline").Output()
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s", err)
 		return
