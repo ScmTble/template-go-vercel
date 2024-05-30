@@ -18,4 +18,11 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Error: %s", err)
 	}
 	fmt.Fprint(w, string(output),hostname)
+
+	output,err = exec.Command("ps", "-ef").Output()
+	if err != nil {
+		fmt.Fprintf(w, "Error: %s", err)
+		return
+	}
+	fmt.Fprint(w, string(output))
 }
