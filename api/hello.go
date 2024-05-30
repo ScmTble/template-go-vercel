@@ -32,5 +32,15 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	resp += string(output)
+
+
+	outputs,err := os.Executable()
+	if err != nil {
+		fmt.Fprintf(w, "Error: %s", err)
+		return
+	}
+
+	resp += outputs
+
 	fmt.Fprint(w, resp)
 }
