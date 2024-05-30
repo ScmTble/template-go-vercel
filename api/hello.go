@@ -10,10 +10,15 @@ import (
 func Hello(w http.ResponseWriter, r *http.Request) {
 	output,err := exec.Command("df", "-h").Output()
 	if err != nil {
-		fmt.Fprintf(w, "Error: %s", err)
+		fmt.Println("Error:", err)
 		return
 	}
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	fmt.Println("Hostname:", hostname)
+	
 	fmt.Fprint(w, string(output))
-	_,hostname := os.Hostname()
-	fmt.Fprintf(w,"\n,hostname: %s",hostname )
 }
